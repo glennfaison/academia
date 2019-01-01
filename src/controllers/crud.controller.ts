@@ -6,7 +6,6 @@ type ModelStatic = typeof Model & {
   new(values?: object, options?: BuildOptions): Model;
 }
 
-
 export abstract class CrudController {
 
   protected Model: ModelStatic;
@@ -77,6 +76,7 @@ export abstract class CrudController {
     try {
       const result = await this.Model.destroy({ where: { id: req.params.id } });
       if (result !== 0) { return res.sendStatus(204); }
+      return res.sendStatus(404);
     } catch (err) {
       return res.status(422).json(err);
     }
