@@ -45,6 +45,10 @@ export class Student extends Model<Student> {
   @Column(DataType.STRING)
   image_path?: string;
 
+  gender_id?: number;
+
+  classroom_id?: number;
+
   @BelongsTo(() => Gender, 'gender_id')
   gender?: Gender;
 

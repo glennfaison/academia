@@ -1,7 +1,8 @@
-import { Table, DefaultScope, AllowNull, Unique, Column, DataType, IsEmail, PrimaryKey, AutoIncrement, Model, BelongsToMany } from 'sequelize-typescript';
+import { Table, DefaultScope, AllowNull, Unique, Column, DataType, IsEmail, PrimaryKey, AutoIncrement, Model, BelongsToMany, BelongsTo } from 'sequelize-typescript';
 import { Gender } from './Gender';
 import { Course } from './Course';
 import { Classroom } from './Classroom';
+import { CourseInstructor } from './CourseInstructor';
 
 @DefaultScope(() => ({ include: [{ model: Gender }] }))
 @Table({ tableName: 'instructors', underscored: true, timestamps: false, })
@@ -47,8 +48,12 @@ export class Instructor extends Model<Instructor> {
   @Column(DataType.STRING(128))
   password?: string;
 
-  @BelongsToMany(() => Course,
-    { through: 'course_instructors', foreignKey: 'instructor_id', otherKey: 'course_id' })
+  gender_id?: number;
+
+  @BelongsTo(() => Gender, 'gender_id')
+  gender?: Gender;
+
+  @BelongsToMany(() => Course, () => CourseInstructor)
   courses_taught?: Course[];
 
   @BelongsToMany(() => Classroom,

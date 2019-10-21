@@ -1,5 +1,6 @@
 import { Table, Model, PrimaryKey, Column, DataType, AutoIncrement, AllowNull, BelongsToMany } from 'sequelize-typescript';
 import { Instructor } from './Instructor';
+import { CourseInstructor } from './CourseInstructor';
 
 @Table({ tableName: 'courses', underscored: true, timestamps: false, })
 export class Course extends Model<Course> {
@@ -21,8 +22,7 @@ export class Course extends Model<Course> {
   @Column(DataType.TEXT)
   description?: string;
 
-  @BelongsToMany(() => Instructor,
-    { through: 'course_instructors', foreignKey: 'course_id', otherKey: 'instructor_id' })
+  @BelongsToMany(() => Instructor, () => CourseInstructor)
   instructors?: Instructor[];
 
 }
