@@ -18,11 +18,17 @@ instructors.route('/:id')
 
 /* Update by id */
 instructors.route('/:id')
-  .put((req, res) => controller.updateById(req, res));
+  .put(async (req, res) => {
+    delete req.body.password;
+    return await controller.updateById(req, res);
+  });
 
 /* Update many */
 instructors.route('/')
-  .put((req, res) => controller.updateMany(req, res));
+  .put(async (req, res) => {
+    delete req.body.password;
+    return await controller.updateMany(req, res);
+  });
 
 /* Delete by id */
 instructors.route('/:id')
