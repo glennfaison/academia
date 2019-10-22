@@ -1,4 +1,4 @@
-export default {
+export const config = {
   jwt: {
     secret: 'secret'
   },
@@ -34,4 +34,7 @@ export default {
     password: 'RzqHxvL0Ht',
     host: 'remotemysql.com',
   },
+  bcrypt: {
+    salt: 10,
+  }
 };

@@ -7,7 +7,7 @@ type ModelStatic = typeof Model & {
 }
 
 
-export class CrudController {
+export abstract class CrudController {
 
   protected Model: ModelStatic;
 
