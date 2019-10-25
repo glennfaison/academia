@@ -84,3 +84,16 @@ auth.route('/student-login')
       return res.status(500).json(err);
     }
   });
+
+/* Get Current User */
+auth.route('/me')
+  .get(async (req, res) => {
+    try {
+      let u = req['me'];
+      let result: Student | null = await Student.findByPk(u.id, { include: [{ all: true }] });
+      if (!result) { return res.status(404).json("No such user!"); }
+      return res.status(201).json(result);
+    } catch (err) {
+      return res.status(500).json(err);
+    }
+  });
