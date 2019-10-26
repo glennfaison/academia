@@ -11,8 +11,9 @@ export class AuthController {
 
   async me(req: Request, res: Response) {
     try {
-      let u = req['me'];
-      let result: Student | Instructor | null = await Student.findByPk(u.id, { include: [{ all: true }] });
+      let me = req['me'];
+      if (!me) { return res.sendStatus(401); }
+      let result: Student | Instructor | null = await Student.findByPk(me.id, { include: [{ all: true }] });
       if (!result) { return res.status(404).json("No such user!"); }
       return res.status(201).json(result);
     } catch (err) {
