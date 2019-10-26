@@ -1,11 +1,10 @@
 import { Router } from 'express';
 import { Instructor } from '../models/Instructor';
-import { Gender } from '../models/Gender';
-import { Classroom } from '../models/Classroom';
 import { Student } from '../models/Student';
 import * as bcrypt from 'bcrypt';
 import * as jsonWebToken from 'jsonwebtoken';
 import { config } from '../config';
+import { decodeJwt } from '../middleware/decode-jwt';
 
 export const auth = Router();
 
@@ -32,7 +31,7 @@ auth.route('/instructor-login')
       if (!result) {
         result = await Instructor.findOne({
           where: { username: req.body.email },
-          include: [Gender, Classroom]
+          include: [{ all: true }]
         });
       }
       if (!result) { return res.status(404).json("Email/username does not exist"); }
@@ -41,6 +40,7 @@ auth.route('/instructor-login')
       }
       const { id, email, username, password } = result;
       const jwt = jsonWebToken.sign({ id, email, username, password }, config.jwt.secret);
+      console.log('jwt: ', jwt);
       return res.status(201).json({ jwt, user: result });
     } catch (err) {
       return res.status(500).json(err);
@@ -70,7 +70,7 @@ auth.route('/student-login')
       if (!result) {
         result = await Student.findOne({
           where: { username: req.body.email },
-          include: [Gender, Classroom]
+          include: [{ all: true }]
         });
       }
       if (!result) { return res.status(404).json("Email/username does not exist"); }
@@ -87,7 +87,7 @@ auth.route('/student-login')
 
 /* Get Current User */
 auth.route('/me')
-  .get(async (req, res) => {
+  .get(decodeJwt, async (req, res) => {
     try {
       let u = req['me'];
       let result: Student | null = await Student.findByPk(u.id, { include: [{ all: true }] });
