@@ -22,7 +22,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use('/auth', auth);
-app.use('/genders', decodeJwt, genders);
+app.use('/genders', genders);
 app.use('/students', decodeJwt, students);
 app.use('/instructors', decodeJwt, instructors);
 app.use('/classrooms', decodeJwt, classrooms);
