@@ -1,9 +1,4 @@
 import { Router } from 'express';
-import { Instructor } from '../models/Instructor';
-import { Student } from '../models/Student';
-import * as bcrypt from 'bcrypt';
-import * as jsonWebToken from 'jsonwebtoken';
-import { config } from '../config';
 import { decodeJwt } from '../middleware/decode-jwt';
 import { AuthController } from '../controllers/auth.controller';
 
