@@ -29,7 +29,7 @@ export abstract class CrudController {
   async fetchMany(req: Request, res: Response) {
     try {
       const result = await this.Model.findAll({ where: req.query, include: [{ all: true }] });
-      res.status(201).json(result);
+      res.status(200).json(result);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -39,7 +39,7 @@ export abstract class CrudController {
   async fetchById(req: Request, res: Response) {
     try {
       const result = await this.Model.findByPk(req.params.id, { include: [{ all: true }] });
-      return res.status(201).json(result);
+      return res.status(200).json(result);
     } catch (err) {
       return res.status(404).json(err);
     }
@@ -70,7 +70,7 @@ export abstract class CrudController {
   async deleteById(req: Request, res: Response) {
     try {
       const result = await this.Model.destroy({ where: { id: req.params.id } });
-      if (result !== 0) { return res.status(204).json('OK'); }
+      if (result !== 0) { return res.sendStatus(204); }
     } catch (err) {
       return res.status(422).json(err);
     }
