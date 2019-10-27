@@ -28,7 +28,7 @@ export abstract class CrudController {
   /* Fetch many. */
   async fetchMany(req: Request, res: Response) {
     try {
-      const detailed: boolean = req.params.detailed === 'true'.toLowerCase() ? true : false;
+      const detailed: boolean = req.query.detailed === 'false' ? false : true;
       let result;
       if (detailed) {
         result = await this.Model.findAll({ where: req.query, include: [{ all: true }] });
