@@ -1,5 +1,5 @@
 import * as faker from 'faker';
-import { CourseExamination } from '../models/CourseExamination';
+import { WrittenExam } from '../models/WrittenExam';
 import { Course } from '../models/Course';
 import { Examination } from '../models/Examination';
 import { Instructor } from '../models/Instructor';
@@ -22,6 +22,8 @@ export async function generate(count: number = 1): Promise<void> {
     }
   }
 
-  const arr: any[] = Array.from({length: count}, createOne);
-  CourseExamination.bulkCreate(arr);
+  const arr: any[] = Array.from({ length: count }, createOne);
+  try {
+    WrittenExam.bulkCreate(arr);
+  } catch (err) { throw err; }
 }

@@ -28,7 +28,13 @@ export abstract class CrudController {
   /* Fetch many. */
   async fetchMany(req: Request, res: Response) {
     try {
-      const result = await this.Model.findAll({ where: req.query, include: [{ all: true }] });
+      const detailed: boolean = req.params.detailed === 'true'.toLowerCase() ? true : false;
+      let result;
+      if (detailed) {
+        result = await this.Model.findAll({ where: req.query, include: [{ all: true }] });
+      } else {
+        result = await this.Model.findAll({ where: req.query });
+      }
       res.status(200).json(result);
     } catch (err) {
       res.status(500).json(err);

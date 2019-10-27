@@ -1,6 +1,8 @@
 import { Gender } from '../models/Gender';
 import { Student } from '../models/Student';
 import * as faker from 'faker';
+import { config } from '../config';
+import * as bcrypt from 'bcrypt';
 import { Classroom } from '../models/Classroom';
 
 export async function generate(count: number = 1): Promise<void> {
@@ -21,7 +23,7 @@ export async function generate(count: number = 1): Promise<void> {
       email: faker.internet.email(first_name, other_names),
       username: faker.internet.userName(first_name, other_names),
       image_path: faker.image.imageUrl(),
-      password: faker.internet.password(),
+      password: bcrypt.hashSync('password', config.bcrypt.salt),
       date_of_birth: faker.date.between(new Date(2001, 1, 1), new Date(2010, 12, 31)).toISOString(),
       place_of_birth: faker.address.country(),
     };

@@ -6,11 +6,11 @@ import { Instructor } from './Instructor';
 export class CourseInstructor extends Model<CourseInstructor> {
 
   @ForeignKey(() => Course)
-  @Column
+  @Column({ unique: 'course_instructors_instructor_id_course_id_unique' })
   course_id?: number;
 
   @ForeignKey(() => Instructor)
-  @Column
+  @Column({ unique: 'course_instructors_instructor_id_course_id_unique' })
   instructor_id?: number;
 
 }

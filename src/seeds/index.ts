@@ -4,7 +4,7 @@ import * as classrooms from './classrooms.seed';
 import * as courses from './courses.seed';
 import * as instructors from './instructors.seed';
 import * as students from './students.seed';
-import * as courseExaminations from './course-examinations.seed';
+import * as writtenExams from './written-exams.seed';
 import * as courseInstructors from './course-instructors.seed';
 
 export async function generate() {
@@ -27,9 +27,10 @@ export async function generate() {
     await students.generate(50 * 28);
   } catch (err) { console.log('failed to complete generation of students data.')}
   try {
-    await courseExaminations.generate(100);
-  } catch (err) { console.log('failed to complete generation of courseExaminations data.')}
+    await writtenExams.generate(100);
+  } catch (err) { console.log('failed to complete generation of Written Exams data.')}
   try {
     await courseInstructors.generate(100);
-  } catch (err) { console.log('failed to complete generation of courseInstructors data.')}
+  } catch (err) { console.log('failed to complete generation of Course Instructors data.')}
+  console.log('\nSeeding Complete\n');
 }
