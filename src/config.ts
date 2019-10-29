@@ -26,6 +26,7 @@ export const config = {
     privileges: '/privileges',
     persons: '/persons',
     genders: '/genders',
+    instructors: '/instructors',
   },
   db: {
     dialect: 'mysql',
