@@ -1,10 +1,10 @@
 import * as genders from './genders.seed';
-import * as examinations from './examinations.seed';
+import * as sequences from './sequences.seed';
 import * as classrooms from './classrooms.seed';
 import * as courses from './courses.seed';
 import * as instructors from './instructors.seed';
 import * as students from './students.seed';
-import * as writtenExams from './written-exams.seed';
+import * as examinations from './examinations.seed';
 import * as courseInstructors from './course-instructors.seed';
 
 export async function generate() {
@@ -12,7 +12,7 @@ export async function generate() {
     await genders.generate();
   } catch (err) { console.log('failed to complete generation of genders data.')}
   try {
-    await examinations.generate(10);
+    await sequences.generate(10);
   } catch (err) { console.log('failed to complete generation of examinations data.')}
   try {
     await classrooms.generate(28)
@@ -27,7 +27,7 @@ export async function generate() {
     await students.generate(50 * 28);
   } catch (err) { console.log('failed to complete generation of students data.')}
   try {
-    await writtenExams.generate(100);
+    await examinations.generate(100);
   } catch (err) { console.log('failed to complete generation of Written Exams data.')}
   try {
     await courseInstructors.generate(100);

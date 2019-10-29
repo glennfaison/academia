@@ -1,13 +1,13 @@
 import { createServer } from 'http';
 import { app } from './app';
 import { sequelize } from './sequelize';
-// import * as seeds from './seeds';
+import * as seeds from './seeds';
 
 const port = process.env.PORT || 3000;
 
 (async () => {
   await sequelize.sync(/* { force: true } */);
-  // seeds.generate(); // create seeds asynchronously
+  seeds.generate(); // create seeds asynchronously
 
   createServer(app)
     .listen(

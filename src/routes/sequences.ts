@@ -1,29 +1,29 @@
 import { Router } from 'express';
-import { WrittenExamController } from '../controllers/written-exam.controller';
+import { SequenceController } from '../controllers/sequence.controller';
 
-const controller = new WrittenExamController();
-export const writtenExams = Router();
+const controller = new SequenceController();
+export const sequences = Router();
 
 /* Create one. */
-writtenExams.route('/')
+sequences.route('/')
   .post((req, res) => controller.createOne(req, res));
 
 /* Fetch many. */
-writtenExams.route('/')
+sequences.route('/')
   .get((req, res) => controller.fetchMany(req, res));
 
 /* Fetch by id */
-writtenExams.route('/:id')
+sequences.route('/:id')
   .get((req, res) => controller.fetchById(req, res));
 
 /* Update by id */
-writtenExams.route('/:id')
+sequences.route('/:id')
   .put((req, res) => controller.updateById(req, res));
 
 /* Update many */
-writtenExams.route('/')
+sequences.route('/')
   .put((req, res) => controller.updateMany(req, res));
 
 /* Delete by id */
-writtenExams.route('/:id')
+sequences.route('/:id')
   .delete((req, res) => controller.deleteById(req, res));
