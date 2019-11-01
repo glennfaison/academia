@@ -5,4 +5,5 @@ export * from './classrooms';
 export * from './sequences';
 export * from './courses';
 export * from './examinations';
+export * from './student-examinations';
 export * from './auth';

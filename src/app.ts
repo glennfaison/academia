@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const compression = require('compression');
 import * as errorhandler from 'strong-error-handler';
-import { genders, students, instructors, sequences, classrooms, courses, auth, examinations } from './routes';
+import { genders, students, instructors, sequences, classrooms, courses, auth, examinations, studentExaminations } from './routes';
 import { enableCors } from './middleware/enable-cors';
 import { decodeJwt } from './middleware/decode-jwt';
 
@@ -29,6 +29,7 @@ app.use('/classrooms', decodeJwt, classrooms);
 app.use('/sequences', decodeJwt, sequences);
 app.use('/courses', decodeJwt, courses);
 app.use('/examinations', decodeJwt, examinations);
+app.use('/student_examinations', decodeJwt, studentExaminations);
 
 app.use(errorhandler({
   debug: process.env.ENV !== 'prod',
