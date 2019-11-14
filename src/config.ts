@@ -30,9 +30,9 @@ export const config = {
   },
   db: {
     dialect: 'mysql',
-    username: 'Er8Wvj9lSv',
-    dbname: 'Er8Wvj9lSv',
-    password: 'RzqHxvL0Ht',
+    username: '3eP9td1Iay',
+    dbname: '3eP9td1Iay',
+    password: '9ncWiH7X8d',
     host: 'remotemysql.com',
   },
   bcrypt: {

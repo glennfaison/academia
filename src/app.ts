@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as path from 'path';
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const compression = require('compression');
@@ -21,15 +22,23 @@ app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') { res.status(401).send(err); }
 });
 
-app.use('/auth', auth);
-app.use('/genders', genders);
-app.use('/students', decodeJwt, students);
-app.use('/instructors', decodeJwt, instructors);
-app.use('/classrooms', decodeJwt, classrooms);
-app.use('/sequences', decodeJwt, sequences);
-app.use('/courses', decodeJwt, courses);
-app.use('/examinations', decodeJwt, examinations);
-app.use('/student_examinations', decodeJwt, studentExaminations);
+app.use('/api/v1/auth', auth);
+app.use('/api/v1/genders', genders);
+app.use('/api/v1/students', decodeJwt, students);
+app.use('/api/v1/instructors', decodeJwt, instructors);
+app.use('/api/v1/classrooms', decodeJwt, classrooms);
+app.use('/api/v1/sequences', decodeJwt, sequences);
+app.use('/api/v1/courses', decodeJwt, courses);
+app.use('/api/v1/examinations', decodeJwt, examinations);
+app.use('/api/v1/student_examinations', decodeJwt, studentExaminations);
+
+// Serve static files in /public
+app.use(express.static('public'));
+
+//Send all requests to /public/index.html
+app.get('*', function (req, res) {
+	res.sendFile(path.join('public/index.html'));
+});
 
 app.use(errorhandler({
   debug: process.env.ENV !== 'prod',
