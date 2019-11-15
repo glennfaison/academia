@@ -32,8 +32,6 @@ app.use('/api/v1/courses', decodeJwt, courses);
 app.use('/api/v1/examinations', decodeJwt, examinations);
 app.use('/api/v1/student_examinations', decodeJwt, studentExaminations);
 
-app.use('/', express.static(__dirname + '/../public'));
-
 // Allowed extensions list can be extended depending on your own needs
 const allowedExt = ['.js', '.ico', '.css', '.png', '.jpg', '.woff2', '.woff', '.ttf', '.svg',];
 
