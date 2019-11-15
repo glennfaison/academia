@@ -34,9 +34,17 @@ app.use('/api/v1/student_examinations', decodeJwt, studentExaminations);
 
 app.use('/', express.static(__dirname + '/../public'));
 
+// Allowed extensions list can be extended depending on your own needs
+const allowedExt = ['.js', '.ico', '.css', '.png', '.jpg', '.woff2', '.woff', '.ttf', '.svg',];
+
 //Send all requests to /public/index.html
 app.get('*', function (req, res) {
-	res.sendFile(__dirname + '/../public/index.html');
+  res.sendFile(__dirname + '/../public/index.html');
+  if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+    res.sendFile(__dirname + `/../public/index.html/${req.url}`);
+  } else {
+    res.sendFile(__dirname + '/../public/index.html');
+  }
 });
 
 app.use(errorhandler({
