@@ -32,12 +32,11 @@ app.use('/api/v1/courses', decodeJwt, courses);
 app.use('/api/v1/examinations', decodeJwt, examinations);
 app.use('/api/v1/student_examinations', decodeJwt, studentExaminations);
 
-// Serve static files in /public
-app.use(express.static(path.resolve('public')));
+app.use(express.static(path.resolve(__dirname + '/public')));
 
 //Send all requests to /public/index.html
 app.get('*', function (req, res) {
-	res.sendFile(path.resolve('public/index.html'));
+	res.sendFile(path.resolve(__dirname + '/public/index.html'));
 });
 
 app.use(errorhandler({
