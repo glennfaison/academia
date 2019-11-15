@@ -38,7 +38,7 @@ const allowedExt = ['.js', '.ico', '.css', '.png', '.jpg', '.woff2', '.woff', '.
 //Send all requests to /public/index.html
 app.get('*', function (req, res) {
   if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
-    res.sendFile(__dirname + `/../public/index.html/${req.url}`);
+    res.sendFile(__dirname + `/../public/${req.url}`);
   } else {
     res.sendFile(__dirname + '/../public/index.html');
   }
