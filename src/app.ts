@@ -1,5 +1,5 @@
 import * as express from 'express';
-// import * as path from 'path';
+import * as path from 'path';
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const compression = require('compression');
@@ -38,9 +38,9 @@ const allowedExt = ['.js', '.ico', '.css', '.png', '.jpg', '.woff2', '.woff', '.
 //Send all requests to /public/index.html
 app.get('*', function (req, res) {
   if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
-    res.sendFile(__dirname + `/../public/${req.url}`);
+    res.sendFile(path.resolve(`./public/${req.url}`));
   } else {
-    res.sendFile(__dirname + '/../public/index.html');
+    res.sendFile(path.resolve('./public/index.html'));
   }
 });
 
