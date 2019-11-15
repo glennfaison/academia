@@ -32,7 +32,7 @@ app.use('/api/v1/courses', decodeJwt, courses);
 app.use('/api/v1/examinations', decodeJwt, examinations);
 app.use('/api/v1/student_examinations', decodeJwt, studentExaminations);
 
-app.use(express.static(__dirname + '/../public'));
+app.use('/', express.static(__dirname + '/../public'));
 
 //Send all requests to /public/index.html
 app.get('*', function (req, res) {
