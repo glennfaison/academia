@@ -30,5 +30,6 @@ export async function generate(count: number = 1): Promise<void> {
   }
 
   const arr: any[] = Array.from({length: count}, createOne);
-  Student.bulkCreate(arr);
+  const promises = arr.map(i => Student.build(i).save());
+  await Promise.all(promises);
 }

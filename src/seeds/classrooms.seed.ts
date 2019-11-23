@@ -3,7 +3,8 @@ import { Classroom } from '../models/Classroom';
 
 export async function generate(count: number = 1): Promise<void> {
   const arr: any[] = Array.from({length: count}, createOne);
-  Classroom.bulkCreate(arr);
+  const promises = arr.map(i => Classroom.build(i).save());
+  await Promise.all(promises);
 }
 
 function createOne() {

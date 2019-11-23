@@ -3,7 +3,8 @@ import { Sequence } from '../models/Sequence';
 
 export async function generate(count: number = 1): Promise<void> {
   const arr: any[] = Array.from({length: count}, createOne);
-  Sequence.bulkCreate(arr);
+  const promises = arr.map(i => Sequence.build(i).save());
+  await Promise.all(promises);
 }
 
 function createOne() {

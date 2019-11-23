@@ -17,5 +17,6 @@ export async function generate(count: number = 1): Promise<void> {
   }
 
   const arr: any[] = Array.from({length: count}, createOne);
-  CourseInstructor.bulkCreate(arr, {fields: ['course_id', 'instructor_id']});
+  const promises = arr.map(i => CourseInstructor.build(i).save({fields: ['course_id', 'instructor_id']}));
+  await Promise.all(promises);
 }
