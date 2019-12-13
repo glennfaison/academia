@@ -28,19 +28,19 @@ export const config = {
     genders: '/genders',
     instructors: '/instructors',
   },
-  db: {
+  db: /* {
     dialect: 'mysql',
     username: '3eP9td1Iay',
     dbname: '3eP9td1Iay',
     password: '9ncWiH7X8d',
     host: 'remotemysql.com',
-  }/* {
+  } */{
     dialect: 'mysql',
     username: 'root',
     dbname: 'academia',
     password: 'root',
     host: 'localhost',
-  } */,
+  },
   bcrypt: {
     salt: 10,
   }
